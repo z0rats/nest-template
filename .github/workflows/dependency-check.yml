@@ -1,0 +1,55 @@
+name: Dependency Management
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly on Sunday
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  check-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Check for outdated dependencies
+        run: yarn outdated || true
+
+      - name: Run yarn audit
+        run: yarn audit || true
+
+      - name: Create issue if vulnerabilities found
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            const auditOutput = execSync('yarn audit --json').toString();
+            const auditData = JSON.parse(auditOutput);
+            
+            if (auditData.vulnerabilities) {
+              const vulnerabilities = Object.values(auditData.vulnerabilities);
+              const issueBody = `## Security Vulnerabilities Found\n\n` +
+                vulnerabilities.map(v => 
+                  `### ${v.name} (${v.severity})\n` +
+                  `- Version: ${v.range}\n` +
+                  `- Fix available: ${v.fixAvailable ? 'Yes' : 'No'}\n` +
+                  `- Description: ${v.description}\n`
+                ).join('\n');
+              
+              github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '⚠️ Security Vulnerabilities Detected',
+                body: issueBody,
+                labels: ['security', 'dependencies']
+              });
+            } 

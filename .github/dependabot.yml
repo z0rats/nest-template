@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "yarn"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    reviewers:
+      - "z0rats"
+    assignees:
+      - "z0rats"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
+        versions: [">= 1.0.0"] 
