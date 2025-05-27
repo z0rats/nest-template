@@ -1,3 +1,5 @@
+[![Maintainability](https://qlty.sh/badges/5044b8c6-978a-4488-861e-c02c1f06837b/maintainability.svg)](https://qlty.sh/gh/z0rats/projects/nest-template)
+
 # NestJS Template
 
 NestJS template with TypeScript & PostgreSQL.
