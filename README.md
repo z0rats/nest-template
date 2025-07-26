@@ -128,6 +128,16 @@ src/
 
 Swagger documentation is available at `http://localhost:3000/api` in development mode.
 
+## CORS Configuration
+
+The application is configured with CORS (Cross-Origin Resource Sharing) settings that restrict access to specific domains:
+
+- **Allowed Origins**: Only Google domains (`*.google.com`, `google.com`)
+- **Methods**: GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS
+- **Credentials**: Enabled for cross-origin requests
+
+This security measure ensures that only requests from Google domains can access the API endpoints.
+
 ## Environment Variables
 
 Required environment variables:
