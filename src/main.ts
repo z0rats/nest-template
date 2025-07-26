@@ -22,6 +22,12 @@ async function bootstrap() {
     logger.log('Swagger is running on http://localhost:3000/api');
   }
 
+  app.enableCors({
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+    origin: [/^(https?:\/\/([^\.]*\.)?google\.com)(\/)?$/i],
+  });
+
   await app.listen(3000);
 }
 bootstrap();
