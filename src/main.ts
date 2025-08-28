@@ -25,7 +25,7 @@ async function bootstrap() {
   app.enableCors({
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
-    origin: [/^(https?:\/\/([^\.]*\.)?google\.com)(\/)?$/i],
+    origin: [/^(https?:\/\/([^.]*\.)?google\.com)(\/)?$/i],
   });
 
   await app.listen(3000);
