@@ -2,13 +2,14 @@
 
 # NestJS Template
 
-NestJS template with TypeScript & PostgreSQL.
+NestJS template with TypeScript & PostgreSQL & Redis.
 
 ## Tech Stack
 
 - **Framework**: NestJS v11
 - **Language**: TypeScript
 - **Database**: PostgreSQL
+- **Cache**: Redis
 - **ORM**: TypeORM
 - **Authentication**: JWT + Passport
 - **API Documentation**: Swagger/OpenAPI
@@ -20,6 +21,7 @@ NestJS template with TypeScript & PostgreSQL.
 - Node.js (v22 or higher)
 - Yarn package manager
 - PostgreSQL
+- Redis
 - Docker (optional)
 
 ## Installation
