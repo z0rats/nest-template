@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import dataSource from './typeorm.config';
 import { UsersModule } from './users/users.module';
+import { RedisCacheModule } from './redis-cache/redis-cache.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UsersModule } from './users/users.module';
       ...dataSource.options,
     }),
     UsersModule,
+    RedisCacheModule,
   ],
 })
 export class AppModule {}
