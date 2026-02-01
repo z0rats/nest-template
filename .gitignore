@@ -41,3 +41,6 @@ lerna-debug.log*
 
 # Docker
 postgres_data
+
+# Yarn
+.yarn/*
