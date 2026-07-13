@@ -8,7 +8,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger('Bootstrap');
   const port = process.env.PORT ?? 3000;
-  console.log('###DEBUG raw PORT env =', JSON.stringify(process.env.PORT));
 
   // Only enable Swagger on localhost
   if (process.env.NODE_ENV === 'development') {
