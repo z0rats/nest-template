@@ -18,7 +18,7 @@ NestJS template with TypeScript & PostgreSQL & Redis.
 
 ## Prerequisites
 
-- Node.js (v22 or higher)
+- Node.js (v24 or higher)
 - Yarn package manager
 - PostgreSQL
 - Redis
@@ -47,7 +47,7 @@ Automated CI/CD pipelines for code quality and security:
 ### Lint Workflow
 - Runs on push to `master` and PRs
 - ESLint code analysis
-- Node.js v22 with yarn caching
+- Node.js v24 with yarn caching
 
 ### Dependency Check
 - Weekly security audit

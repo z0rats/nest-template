@@ -11,7 +11,8 @@ export class RedisCacheService {
     try {
       return await this.cache.get(key);
     } catch (error) {
-      this.logger.error(`Failed to get key "${key}": ${error.message}`, error.stack);
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`Failed to get key "${key}": ${err.message}`, err.stack);
     }
   }
 
@@ -22,9 +23,10 @@ export class RedisCacheService {
       if (typeof fromCache === 'object') return fromCache;
       return JSON.parse(fromCache);
     } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
       this.logger.error(
-        `Failed to get object for key "${key}": ${error.message}`,
-        error.stack,
+        `Failed to get object for key "${key}": ${err.message}`,
+        err.stack,
       );
       return null;
     }
@@ -34,7 +36,8 @@ export class RedisCacheService {
     try {
       await this.cache.set(key, value, ttl);
     } catch (error) {
-      this.logger.error(`Failed to set key "${key}": ${error.message}`, error.stack);
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`Failed to set key "${key}": ${err.message}`, err.stack);
     }
   }
 
@@ -42,7 +45,8 @@ export class RedisCacheService {
     try {
       await this.set(key, '', 1);
     } catch (error) {
-      this.logger.error(`Failed to remove key "${key}": ${error.message}`, error.stack);
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`Failed to remove key "${key}": ${err.message}`, err.stack);
     }
   }
 }

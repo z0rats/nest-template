@@ -7,6 +7,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger('Bootstrap');
+  const port = process.env.PORT ?? 3000;
+  console.log('###DEBUG raw PORT env =', JSON.stringify(process.env.PORT));
 
   // Only enable Swagger on localhost
   if (process.env.NODE_ENV === 'development') {
@@ -19,7 +21,7 @@ async function bootstrap() {
 
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
-    logger.log('Swagger is running on http://localhost:3000/api');
+    logger.log(`Swagger is running on http://localhost:${port}/api`);
   }
 
   app.enableCors({
@@ -28,6 +30,6 @@ async function bootstrap() {
     origin: [/^(https?:\/\/([^.]*\.)?google\.com)(\/)?$/i],
   });
 
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
